@@ -150,6 +150,7 @@ const upload = () => {
                         ))}
                     </select>
                     <div className='flex gap-6 mt-10'>
+
                         <button
                             onClick={() => { }}
                             type='button'
