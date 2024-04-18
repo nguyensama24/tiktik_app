@@ -68,8 +68,8 @@ const upload = () => {
         }
     }
     return (
-        <div className='flex w-full h-full absolute left-0 top-[60px] mb-10 pt-10 lg:pt-20 bg-[#F8F8F8] justify-center'>
-            <div className='bg-white rounded-lg xl:h-[80vh] w-[60%] flex gap-6 flex-wrap justify-between items-center p-14 pt-6'>
+        <div className='flex w-full h-full bg-[#F8F8F8] justify-center'>
+            <div className='bg-white rounded-lg w-full flex flex-col gap-6 p-6'>
                 <div>
                     <div>
                         <div>
@@ -77,19 +77,18 @@ const upload = () => {
                             <p className='text-md text-gray-400 mt-1'>Post a video to your account</p>
                         </div>
                     </div>
-                    <div className='border-dashed rounded-xl
-                border-4 border-gray-200 flex flex-col justify-center items-center outline-none mt-10 w-[260px] h-[460px] p-10 cursor-pointer hover:border-red-300 hover:bg-gray-100'>
+                    <div className='border-dashed rounded-xl border-4 border-gray-200 flex flex-col justify-center items-center p-6 cursor-pointer hover:border-red-300 hover:bg-gray-100'>
                         {isLoading ? (
                             <p>Uploading.....</p>
                         ) : (
                             <div>
                                 {videoAsset ? (
                                     <div>
-                                        <video src={videoAsset.url} loop controls className='rounded-xl h-[350px] mt-10 bg-black'></video>
+                                        <video src={videoAsset.url} loop controls className='rounded-xl h-[350px] bg-black'></video>
                                     </div>
                                 ) : (
                                     <label className='cursor-pointer'>
-                                        <div className='flex flex-col items-center justify-center h-full'>
+                                        <div className='flex flex-col items-center justify-center '>
                                             <div className='flex flex-col items-center justify-center '>
                                                 <p className='font-bold text-xl'>
                                                     <FaCloudUploadAlt className='text-gray-300 text-6xl' />
@@ -104,7 +103,7 @@ const upload = () => {
                                                 Up to 10 minutes <br />
                                                 Less than 2GB
                                             </p>
-                                            <p className='bg-[#F51997] text-center mt-10 rounded text-white text-md font-medium p-2 w-52 outline-none'>
+                                            <p className='bg-[#F51997] text-center mt-4 rounded text-white text-md font-medium p-2 w-full outline-none'>
                                                 Select File
                                             </p>
                                         </div>
@@ -120,7 +119,7 @@ const upload = () => {
                             </div>
                         )}
                         {wrongFileType && (
-                            <p className='text-center text-xl text-red-400 font-semibold mt-4 w-[250px]'>
+                            <p className='text-center text-xl text-red-400 font-semibold mt-4'>
                                 Please select a video file
                             </p>
                         )}
@@ -138,7 +137,7 @@ const upload = () => {
                     <label className='text-md font-medium'> Choose a Category</label>
                     <select
                         onChange={(e) => setCategory(e.target.value)}
-                        className='outline-none border-2 border-gray-200 text-md capitalize lg:p-2 p-2 rounded cursor-pointer'
+                        className='outline-none border-2 border-gray-200 text-md capitalize p-2 rounded cursor-pointer'
                     >
                         {topics.map((topic) => (
                             <option
@@ -154,14 +153,14 @@ const upload = () => {
                         <button
                             onClick={() => { }}
                             type='button'
-                            className='border-gray-300 border-2 text-md font-medium p-2 rounded w-28 lg:w-44 outline-none'
+                            className='border-gray-300 border-2 text-md font-medium p-2 rounded w-full outline-none'
                         >
                             Discard
                         </button>
                         <button
                             onClick={handlePost}
                             type='button'
-                            className='bg-[#F51997] text-white text-md font-medium p-2 rounded w-28 lg:w-44 outline-none'
+                            className='bg-[#F51997] text-white text-md font-medium p-2 rounded w-full outline-none'
                         >
                             Post
                         </button>

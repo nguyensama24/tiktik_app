@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+
 import { useRouter } from 'next/router'
 import Image from 'next/image';
 import Link from 'next/link';
@@ -8,6 +9,8 @@ import { BsFillPlayFill } from 'react-icons/bs';
 import { HiVolumeUp, HiVolumeOff } from 'react-icons/hi';
 import axios from 'axios';
 import useAuthStore from '../../store/authStore';
+
+
 
 import { BASE_URL } from '../../utils';
 import { Video } from '../../types';
@@ -26,8 +29,8 @@ const Detail = ({ postDetails }: IProps) => {
     const [isVideoMute, setIsVideoMute] = useState(false)
     const router = useRouter();
     const { userProfile }: any = useAuthStore();
-
-
+    const [comment, setComment] = useState("");
+    const [isPostingComment, setIsPostingComment] = useState(false);
 
 
     const onVideoClick = () => {
@@ -54,6 +57,21 @@ const Detail = ({ postDetails }: IProps) => {
                 like
             })
             setPost({ ...post, likes: data.likes });
+        }
+    }
+
+    const addComment = async (e: any) => {
+        e.preventDefault();
+        if (userProfile && comment) {
+            setIsPostingComment(true);
+
+            const { data } = await axios.put(`${BASE_URL}/api/post/${post._id}`, {
+                userId: userProfile._id,
+                comment
+            });
+            setPost({ ...post, comments: data.comments });
+            setComment('');
+            setIsPostingComment(false)
         }
     }
 
@@ -147,7 +165,13 @@ const Detail = ({ postDetails }: IProps) => {
                             />
                         )}
                     </div>
-                    <Comments />
+                    <Comments
+                        comment={comment}
+                        setComment={setComment}
+                        addComment={addComment}
+                        comments={post.comments}
+                        isPostingComment={isPostingComment}
+                    />
                 </div>
             </div>
 
