@@ -24,8 +24,8 @@ interface IProps {
 
 const Detail = ({ postDetails }: IProps) => {
     const [post, setPost] = useState(postDetails)
-    const [likeCount, setLikeCount] = useState(postDetails.likes.length);
-    const [likeCheck, setLikeCheck] = useState(false);
+
+
     const [playing, setPlaying] = useState(false)
     const videoRef = useRef<HTMLVideoElement>(null);
     const [isVideoMute, setIsVideoMute] = useState(false)
@@ -53,13 +53,7 @@ const Detail = ({ postDetails }: IProps) => {
 
     const handleLike = async (like: boolean) => {
         if (userProfile) {
-            if (like == true) {
-                setLikeCount(likeCount + 1);
-                setLikeCheck(true);
-            } else {
-                setLikeCount(likeCount - 1);
-                setLikeCheck(false);
-            }
+
             const { data } = await axios.put(`${BASE_URL}/api/like`, {
                 userId: userProfile._id,
                 postId: post._id,
@@ -168,8 +162,7 @@ const Detail = ({ postDetails }: IProps) => {
                     <div className='mt-10 px-10'>
                         {userProfile && (
                             <LikeButton
-                                likeCheck={likeCheck}
-                                likesCount={likeCount}
+
                                 likes={post.likes}
                                 handleLike={() => handleLike(true)}
                                 handleDislike={() => handleLike(false)}

@@ -5,17 +5,19 @@ import { NextPage } from 'next';
 import useAuthStore from '../store/authStore';
 
 interface IProps {
-    likeCheck: boolean,
-    likesCount: any,
+
+
     likes: any;
     // flex: string;
     handleLike: () => void;
     handleDislike: () => void;
 }
 
-const LikeButton: NextPage<IProps> = ({ likeCheck, likesCount, likes, handleLike, handleDislike }) => {
+const LikeButton: NextPage<IProps> = ({ likes, handleLike, handleDislike }) => {
     const [alreadyLiked, setAlreadyLiked] = useState(false);
     const { userProfile }: any = useAuthStore();
+    const [likeCount, setLikeCount] = useState(likes.length);
+
     //const [like, setlike] = useState('');
     let filterLikes = likes?.filter((item: any) => item._ref === userProfile?._id);
     useEffect(() => {
@@ -30,32 +32,26 @@ const LikeButton: NextPage<IProps> = ({ likeCheck, likesCount, likes, handleLike
 
         }
 
-        LikeCheck();
-    }, [likeCheck, filterLikes, likes]);
+
+    }, [filterLikes, likes]);
 
 
-    const LikeCheck = () => {
-        if (likeCheck == true) {
-            setAlreadyLiked(true);
-        } else {
-            setAlreadyLiked(false);
-        }
-    }
+
 
 
     return (
         <div className={`flex gap-6`}>
             <div className='mt-4 flex flex-col justify-center items-center cursor-pointer'>
                 {alreadyLiked ? (
-                    <div className='bg-primary rounded-full p-2 md:p-4 text-[#F51997] ' onClick={handleDislike} >
+                    <div className='bg-primary rounded-full p-2 md:p-4 text-[#F51997] ' onClick={() => { handleDislike; setLikeCount(likes.length - 1); setAlreadyLiked(false); }} >
                         <MdFavorite className='text-lg md:text-2xl' />
                     </div>
                 ) : (
-                    <div className='bg-primary rounded-full p-2 md:p-4 ' onClick={handleLike} >
+                    <div className='bg-primary rounded-full p-2 md:p-4 ' onClick={() => { handleLike; setLikeCount(likes.length + 1); setAlreadyLiked(true); }} >
                         <MdFavorite className='text-lg md:text-2xl' />
                     </div>
                 )}
-                <p className='text-md font-semibold '>{likesCount || 0}</p>
+                <p className='text-md font-semibold '>{likeCount || 0}</p>
             </div>
         </div>
     );
