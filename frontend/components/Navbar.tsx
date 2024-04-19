@@ -74,7 +74,7 @@ const Navbar = () => {
                             </button>
                         </Link>
                         {userProfile.image && (
-                            <Link href={`/`}>
+                            <a href={`/profile/${userProfile._id}`}>
                                 <>
                                     <Image
                                         width={40}
@@ -82,11 +82,10 @@ const Navbar = () => {
                                         className='rounded-full cursor-pointer'
                                         src={userProfile.image}
                                         alt='profile photo'
-
-
                                     />
                                 </>
-                            </Link>
+                            </a>
+
 
                         )}
                         <button

@@ -172,14 +172,14 @@ const upload = () => {
                         <button
                             onClick={handlePost}
                             type='button'
-                            className='bg-[#F51997] text-white text-md font-medium p-2 rounded w-full outline-none'
+                            className={`${isLoadingBtn ? ('bg-[#7e3a60]') : ('bg-[#F51997]')} text-white text-md font-medium p-2 rounded w-full outline-none`}
                             disabled={isLoadingBtn}
                         >
                             {isLoadingBtn ? (
                                 <div role="status">
                                     <svg
                                         aria-hidden="true"
-                                        className="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-pink-600"
+                                        className="inline w-5 h-5 text-gray-200 animate-spin dark:text-gray-600 fill-pink-600"
                                         viewBox="0 0 100 101"
                                         fill="none"
                                         xmlns="http://www.w3.org/2000/svg"
