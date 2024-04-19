@@ -16,12 +16,12 @@ interface IProps {
 const LikeButton: NextPage<IProps> = ({ likes, handleLike, handleDislike }) => {
     const [alreadyLiked, setAlreadyLiked] = useState(false);
     const { userProfile }: any = useAuthStore();
-    const [likeCount, setLikeCount] = useState(likes.length);
+    const [likeCount, setLikeCount] = useState(Number);
 
     //const [like, setlike] = useState('');
     let filterLikes = likes?.filter((item: any) => item._ref === userProfile?._id);
     useEffect(() => {
-
+        setLikeCount(likes.length);
         if (filterLikes?.length > 0) {
 
             setAlreadyLiked(true);
