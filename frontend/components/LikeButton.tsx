@@ -16,12 +16,12 @@ interface IProps {
 const LikeButton: NextPage<IProps> = ({ likes, handleLike, handleDislike }) => {
     const [alreadyLiked, setAlreadyLiked] = useState(false);
     const { userProfile }: any = useAuthStore();
-    const [likeCount, setLikeCount] = useState(Number);
+
 
     //const [like, setlike] = useState('');
     let filterLikes = likes?.filter((item: any) => item._ref === userProfile?._id);
     useEffect(() => {
-        setLikeCount(likes.length);
+
         if (filterLikes?.length > 0) {
 
             setAlreadyLiked(true);
@@ -43,15 +43,15 @@ const LikeButton: NextPage<IProps> = ({ likes, handleLike, handleDislike }) => {
         <div className={`flex gap-6`}>
             <div className='mt-4 flex flex-col justify-center items-center cursor-pointer'>
                 {alreadyLiked ? (
-                    <div className='bg-primary rounded-full p-2 md:p-4 text-[#F51997] ' onClick={() => { handleDislike; setLikeCount(likes.length - 1); setAlreadyLiked(false); }} >
+                    <div className='bg-primary rounded-full p-2 md:p-4 text-[#F51997] ' onClick={handleDislike} >
                         <MdFavorite className='text-lg md:text-2xl' />
                     </div>
                 ) : (
-                    <div className='bg-primary rounded-full p-2 md:p-4 ' onClick={() => { handleLike; setLikeCount(likes.length + 1); setAlreadyLiked(true); }} >
+                    <div className='bg-primary rounded-full p-2 md:p-4 ' onClick={handleLike} >
                         <MdFavorite className='text-lg md:text-2xl' />
                     </div>
                 )}
-                <p className='text-md font-semibold '>{likeCount || 0}</p>
+                <p className='text-md font-semibold '>{likes.length || 0}</p>
             </div>
         </div>
     );
