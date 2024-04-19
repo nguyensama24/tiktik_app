@@ -18,6 +18,7 @@ const Navbar = () => {
     const [searchValue, setSearchValue] = useState('')
     const router = useRouter();
 
+
     const handleSearch = (e: { preventDefault: () => void }) => {
         e.preventDefault();
 
@@ -73,7 +74,7 @@ const Navbar = () => {
                             </button>
                         </Link>
                         {userProfile.image && (
-                            <Link href='/'>
+                            <Link href={`/`}>
                                 <>
                                     <Image
                                         width={40}
