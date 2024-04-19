@@ -5,24 +5,43 @@ import { NextPage } from 'next';
 import useAuthStore from '../store/authStore';
 
 interface IProps {
+    likeCheck: boolean,
+    likesCount: any,
     likes: any;
     // flex: string;
     handleLike: () => void;
     handleDislike: () => void;
 }
 
-const LikeButton: NextPage<IProps> = ({ likes, handleLike, handleDislike }) => {
+const LikeButton: NextPage<IProps> = ({ likeCheck, likesCount, likes, handleLike, handleDislike }) => {
     const [alreadyLiked, setAlreadyLiked] = useState(false);
     const { userProfile }: any = useAuthStore();
+    //const [like, setlike] = useState('');
     let filterLikes = likes?.filter((item: any) => item._ref === userProfile?._id);
-
     useEffect(() => {
+
         if (filterLikes?.length > 0) {
+
+            setAlreadyLiked(true);
+
+        } else {
+
+            setAlreadyLiked(false);
+
+        }
+
+        LikeCheck();
+    }, [likeCheck, filterLikes, likes]);
+
+
+    const LikeCheck = () => {
+        if (likeCheck == true) {
             setAlreadyLiked(true);
         } else {
             setAlreadyLiked(false);
         }
-    }, [filterLikes, likes]);
+    }
+
 
     return (
         <div className={`flex gap-6`}>
@@ -36,7 +55,7 @@ const LikeButton: NextPage<IProps> = ({ likes, handleLike, handleDislike }) => {
                         <MdFavorite className='text-lg md:text-2xl' />
                     </div>
                 )}
-                <p className='text-md font-semibold '>{likes?.length || 0}</p>
+                <p className='text-md font-semibold '>{likesCount || 0}</p>
             </div>
         </div>
     );
