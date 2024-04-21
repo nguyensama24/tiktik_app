@@ -33,6 +33,24 @@ const Detail = ({ postDetails }: IProps) => {
     const { userProfile }: any = useAuthStore();
     const [comment, setComment] = useState("");
     const [isPostingComment, setIsPostingComment] = useState(false);
+    const [likeCount, setLikeCount] = useState<number>(post.likes.length);
+    const [likeOrNot, setLikeOrNot] = useState(false);
+    let filterLikes = postDetails.likes?.filter((item: any) => item._ref === userProfile?._id);
+
+    useEffect(() => {
+        console.log("bruh:" + likeOrNot);
+        if (filterLikes?.length > 0) {
+
+            setLikeOrNot(true);
+
+        } else {
+
+            setLikeOrNot(false);
+
+        }
+
+
+    }, []);
 
 
     const onVideoClick = () => {
@@ -52,6 +70,16 @@ const Detail = ({ postDetails }: IProps) => {
     }, [post, isVideoMute])
 
     const handleLike = async (like: boolean) => {
+
+        if (like == true) {
+            setLikeOrNot(true);
+            setLikeCount(likeCount + 1);
+        } else {
+            setLikeOrNot(false);
+            setLikeCount(likeCount - 1);
+        }
+
+        console.log("likes:" + likeCount);
         if (userProfile) {
 
             const { data } = await axios.put(`${BASE_URL}/api/like`, {
@@ -162,7 +190,8 @@ const Detail = ({ postDetails }: IProps) => {
                     <div className='mt-10 px-10'>
                         {userProfile && (
                             <LikeButton
-
+                                likeOrNot={likeOrNot}
+                                likeCount={likeCount}
                                 likes={post.likes}
                                 handleLike={() => handleLike(true)}
                                 handleDislike={() => handleLike(false)}

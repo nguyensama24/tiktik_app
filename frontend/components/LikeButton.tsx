@@ -8,21 +8,22 @@ interface IProps {
 
 
     likes: any;
-    // flex: string;
+    likeCount: any;
+    likeOrNot: any;
     handleLike: () => void;
     handleDislike: () => void;
 }
 
-const LikeButton: NextPage<IProps> = ({ likes, handleLike, handleDislike }) => {
+const LikeButton: NextPage<IProps> = ({ likeCount, likeOrNot, likes, handleLike, handleDislike }) => {
     const [alreadyLiked, setAlreadyLiked] = useState(false);
     const { userProfile }: any = useAuthStore();
 
 
     //const [like, setlike] = useState('');
-    let filterLikes = likes?.filter((item: any) => item._ref === userProfile?._id);
+    // let filterLikes = likes?.filter((item: any) => item._ref === userProfile?._id);
     useEffect(() => {
 
-        if (filterLikes?.length > 0) {
+        if (likeOrNot == true) {
 
             setAlreadyLiked(true);
 
@@ -33,7 +34,7 @@ const LikeButton: NextPage<IProps> = ({ likes, handleLike, handleDislike }) => {
         }
 
 
-    }, [filterLikes, likes]);
+    }, [likeOrNot]);
 
 
 
@@ -52,7 +53,7 @@ const LikeButton: NextPage<IProps> = ({ likes, handleLike, handleDislike }) => {
                     </div>
                 )}
 
-                <p className='text-md font-semibold '>{likes.length || 0}</p>
+                <p className='text-md font-semibold '>{likeCount || 0}</p>
             </div>
         </div>
     );
