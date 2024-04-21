@@ -38,7 +38,7 @@ const Detail = ({ postDetails }: IProps) => {
     let filterLikes = postDetails.likes?.filter((item: any) => item._ref === userProfile?._id);
 
     useEffect(() => {
-        console.log("bruh:" + likeOrNot);
+
         if (filterLikes?.length > 0) {
 
             setLikeOrNot(true);
@@ -79,7 +79,7 @@ const Detail = ({ postDetails }: IProps) => {
             setLikeCount(likeCount - 1);
         }
 
-        console.log("likes:" + likeCount);
+
         if (userProfile) {
 
             const { data } = await axios.put(`${BASE_URL}/api/like`, {
