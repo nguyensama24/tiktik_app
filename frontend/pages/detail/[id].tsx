@@ -33,7 +33,7 @@ const Detail = ({ postDetails }: IProps) => {
     const { userProfile }: any = useAuthStore();
     const [comment, setComment] = useState("");
     const [isPostingComment, setIsPostingComment] = useState(false);
-    const [likeCount, setLikeCount] = useState<number>(post.likes.length);
+    const [likeCount, setLikeCount] = useState<number>(post.likes.length || 0);
     const [likeOrNot, setLikeOrNot] = useState(false);
     let filterLikes = postDetails.likes?.filter((item: any) => item._ref === userProfile?._id);
 
